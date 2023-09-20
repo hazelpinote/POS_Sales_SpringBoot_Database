@@ -25,18 +25,18 @@ public class TransactionController {
 			
 			//Create or insert a transaction
 			@PostMapping("/postTransaction")
-			public ProductModel insertProduct(@RequestBody ProductModel product) {
-				return transhis.insertProduct(product);
+			public TransactionModel insertTransaction(@RequestBody TransactionModel transaction) {
+				return transhis.insertTransaction(transaction);
 			}
 			
 			//Read all records
 			@GetMapping("/getAllTransaction")
-			public List<ProductModel> getAllProduct(){
-				return transhis.getAllProduct();
+			public List<TransactionModel> getAllTransaction(){
+				return transhis.getAllTransaction();
 			}
 			
-			//Read a record by product name
-			@GetMapping("/getByProduct")
+			/*Read a record by product name
+			@GetMapping("/getByTransaction")
 			public ProductModel findByProductname(@RequestParam String productname) {
 				return transhis.findByProductName(productname);	
 			}
@@ -51,6 +51,6 @@ public class TransactionController {
 			@DeleteMapping("/deleteProduct/{productid}")
 			public String deleteProduct(@PathVariable int productid) {
 				return pserv.deleteProduct(productid);
-			}
+			}*/
 	
 }
