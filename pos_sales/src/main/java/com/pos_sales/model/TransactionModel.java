@@ -23,6 +23,7 @@ import javax.persistence.Table;
 	    private String customer_name;
 	    private String customer_num;
 	    private String customer_email;
+	    private String date_time;
 	    
 	    //getting the farm name from the product model
 	    @ManyToOne
@@ -38,7 +39,7 @@ import javax.persistence.Table;
 	    public TransactionModel() {}
 	    
 	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name, 
-	    		String customer_num, String customer_email, ProductModel product, AccountsModel account) {
+	    		String customer_num, String customer_email, String date_time,  ProductModel product, AccountsModel account) {
 	        this.transactionid = transactionid;
 	        this.total_quantity = total_quantity;
 	        this.total_price = total_price;
@@ -47,12 +48,21 @@ import javax.persistence.Table;
 	        this.customer_name = customer_name;
 	        this.customer_num = customer_num;
 	        this.customer_email = customer_email;
+	        this.date_time = date_time;
 	        this.product = product;
 	        this.account = account;
 	    }
 
 	    
 	    //SETTERS AND GETTERS
+
+		public String getDate_time() {
+			return date_time;
+		}
+
+		public void setDate_time(String date_time) {
+			this.date_time = date_time;
+		}
 
 		public String getCustomer_name() {
 			return customer_name;
