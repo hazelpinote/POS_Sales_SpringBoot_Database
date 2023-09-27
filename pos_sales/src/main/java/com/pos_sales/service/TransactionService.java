@@ -47,6 +47,9 @@ public class TransactionService {
 					transaction.setTotal_price(newTransactionDetails.getTotal_price());
 					transaction.setTendered_bill(newTransactionDetails.getTendered_bill());
 					transaction.setBalance(newTransactionDetails.getBalance());
+					transaction.setCustomer_name(newTransactionDetails.getCustomer_name());
+					transaction.setCustomer_num(newTransactionDetails.getCustomer_num());
+					transaction.setCustomer_email(newTransactionDetails.getCustomer_email());
 					transaction.setProduct(newTransactionDetails.getProduct());
 					transaction.setAccount(newTransactionDetails.getAccount());
 					
