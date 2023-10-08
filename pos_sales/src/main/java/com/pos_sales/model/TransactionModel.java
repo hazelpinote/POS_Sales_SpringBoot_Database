@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 		@Id
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
+		
 	    private int transactionid;
 	    
 	    private int total_quantity;
@@ -39,7 +40,8 @@ import javax.persistence.Table;
 	    public TransactionModel() {}
 	    
 	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name, 
-	    		String customer_num, String customer_email, String date_time,  ProductModel product, AccountsModel account) {
+	    		String customer_num, String customer_email, String date_time, AccountsModel account, ProductModel product) {
+	    	super();
 	        this.transactionid = transactionid;
 	        this.total_quantity = total_quantity;
 	        this.total_price = total_price;
@@ -49,8 +51,8 @@ import javax.persistence.Table;
 	        this.customer_num = customer_num;
 	        this.customer_email = customer_email;
 	        this.date_time = date_time;
-	        this.product = product;
 	        this.account = account;
+	        this.product = product;
 	    }
 
 	    
