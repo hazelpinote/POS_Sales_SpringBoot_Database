@@ -62,4 +62,17 @@ public class TransactionController {
 				public String deleteTransaction(@PathVariable int transactionid) {
 					return tserv.deleteTransaction(transactionid);
 				}
+				
+			    @GetMapping("/{transactionId}/products")
+			    public List<ProductModel> getProductsForTransaction(@PathVariable int transactionId) {
+			        List<ProductModel> products = tserv.getProducts(transactionId);
+			        
+			        if (products != null) {
+			            return products;
+			        } else {
+			            // Handle the case where the transaction is not found
+			            // You can return an error response or appropriate HTTP status code (e.g., 404 Not Found)
+			            return null;
+			        }
+			    }				
 }
