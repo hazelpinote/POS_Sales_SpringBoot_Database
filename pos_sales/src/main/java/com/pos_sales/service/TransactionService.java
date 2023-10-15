@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pos_sales.model.ProductModel;
 import com.pos_sales.model.TransactionModel;
 import com.pos_sales.repository.TransactionRepository;
 
@@ -51,7 +52,6 @@ public class TransactionService {
 					transaction.setCustomer_num(newTransactionDetails.getCustomer_num());
 					transaction.setCustomer_email(newTransactionDetails.getCustomer_email());
 					transaction.setProduct(newTransactionDetails.getProduct());
-					transaction.setAccount(newTransactionDetails.getAccount());
 					
 					//Step 3 - save the information and return the value
 					return trepo.save(transaction);
@@ -73,4 +73,18 @@ public class TransactionService {
 				
 				return msg;
 			}
+			
+
+		    public List<ProductModel> getProducts(int transactionId) {
+		        // Find the transaction by ID
+		        TransactionModel transaction = trepo.findById(transactionId).get();
+
+		        if (transaction != null) {
+		            // Get the list of products associated with the transaction
+		            return transaction.getProduct();
+		        } else {
+		            // Handle the case where the transaction with the given ID is not found
+		            return null; // You can return an empty list or handle the error as needed
+		        }
+		    }			
 }
