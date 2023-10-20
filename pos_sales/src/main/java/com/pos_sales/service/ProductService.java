@@ -54,6 +54,16 @@ public class ProductService {
 				}
 			}
 			
+			public void decreaseProductQuantity(int productid) {
+				ProductModel product = prepo.findById(productid).get();
+
+		        // Decrease the product quantity by 1 (or your desired logic)
+		        int updatedQuantity = product.getQuantity()- 1;
+		        product.setQuantity(updatedQuantity);
+
+		        prepo.save(product);
+		    }
+			
 			//D - Delete product record
 			public String deleteProduct(int productid) {
 				String msg;

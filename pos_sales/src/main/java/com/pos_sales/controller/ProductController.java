@@ -2,7 +2,11 @@ package com.pos_sales.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,9 +60,24 @@ public class ProductController {
 					return pserv.putProduct(productid, newProductDetails);
 				}
 				
+				//Decrease quantity
+				@PutMapping("/decreaseQuantity/{productid}")
+				public ResponseEntity<String> decreaseProductQuantity(@PathVariable int productid) {
+					try {
+						pserv.decreaseProductQuantity(productid);
+						return new ResponseEntity<>("Product quantity decreased successfully", HttpStatus.OK);
+					} catch (EntityNotFoundException e) {
+						return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+					} catch (Exception e) {
+						return new ResponseEntity<>("Failed to decrease quantity", HttpStatus.INTERNAL_SERVER_ERROR);
+					}
+				}
+				
 				//Delete a record
 				@DeleteMapping("/deleteProduct/{productid}")
 				public String deleteProduct(@PathVariable int productid) {
 					return pserv.deleteProduct(productid);
 				}
+				
+				
 }

@@ -3,6 +3,8 @@ package com.pos_sales.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +45,7 @@ public class AccountsController {
 					return aserv.getAllAccounts();
 				}
 				
+				
 				//Read a record by user name
 				@GetMapping("/getByUser")
 				public AccountsModel findByUsername(@RequestParam String username) {
@@ -58,6 +61,20 @@ public class AccountsController {
 				//Delete a record
 				@DeleteMapping("/deleteAccount/{userid}")
 				public String deleteAccount(@PathVariable int userid) {
-					return aserv.deleteAccount(userid);
+					return
+							aserv.deleteAccount(userid);
 				}
+				
+				@PostMapping("/login")
+				public ResponseEntity<String> login(@RequestBody AccountsModel loginRequest) {
+				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
+				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+				        // Successful login
+				        return new ResponseEntity<>("Login successful", HttpStatus.OK);
+				    } else {
+				        // Failed login
+				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+				    }
+				}
+				
 }
