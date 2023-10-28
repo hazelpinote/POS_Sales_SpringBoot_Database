@@ -2,7 +2,7 @@ package com.pos_sales.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import com.pos_sales.model.AccountsModel;
 import com.pos_sales.repository.AccountsRepository;
 
 
-
+@CrossOrigin("http://localhost:3000")
 @Service
 public class AccountsService {
 	@Autowired

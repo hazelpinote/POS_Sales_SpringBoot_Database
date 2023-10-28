@@ -22,7 +22,7 @@ import com.pos_sales.service.AccountsService;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin('http://localhost:3000')
 @RequestMapping("/user")
 public class AccountsController {
 
@@ -117,6 +117,7 @@ public class AccountsController {
 				    }
 				}		
 				
+				
 				@PostMapping("/loginad")
 				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
 				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
@@ -137,5 +138,5 @@ public class AccountsController {
 				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
 				    }
 				        
-				    }				
+				    }			
 }

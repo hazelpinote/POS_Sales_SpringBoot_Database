@@ -51,6 +51,8 @@ public class TransactionService {
 					transaction.setCustomer_name(newTransactionDetails.getCustomer_name());
 					transaction.setCustomer_num(newTransactionDetails.getCustomer_num());
 					transaction.setCustomer_email(newTransactionDetails.getCustomer_email());
+					transaction.setRefunded(newTransactionDetails.isRefunded());
+					transaction.setReturned(newTransactionDetails.isReturned());
 					transaction.setProduct(newTransactionDetails.getProduct());
 					
 					//Step 3 - save the information and return the value

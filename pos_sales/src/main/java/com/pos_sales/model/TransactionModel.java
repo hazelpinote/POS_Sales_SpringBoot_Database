@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@RestController
+@CrossOrigin("http://localhost:3000")
 @Table(name="tbl_transaction")
 	public class TransactionModel {
 
@@ -28,12 +30,9 @@ import javax.persistence.Table;
 	    private String customer_num;
 	    private String customer_email;
 	    private String date_time;
-	   
-	    
-//	    //getting the farm name from the product model
-//	    @ManyToOne(targetEntity = ProductModel.class, cascade= CascadeType.MERGE)
-//		@JoinColumn(name="productid")
-//		ProductModel product;
+	    private boolean refunded;
+	    private boolean returned;
+
 	    @OneToMany
 	    public List<ProductModel> product;
 	    
@@ -41,7 +40,8 @@ import javax.persistence.Table;
 	    public TransactionModel() {}
 	    
 	    public TransactionModel(int transactionid, int total_quantity, double total_price, double tendered_bill, double balance, String customer_name, 
-	    		String customer_num, String customer_email, String date_time,  List<ProductModel> product) {
+	    		String customer_num, String customer_email, String date_time, boolean refunded, boolean returned, List<ProductModel> product) {
+	    	super();
 	        this.transactionid = transactionid;
 	        this.total_quantity = total_quantity;
 	        this.total_price = total_price;
@@ -51,6 +51,8 @@ import javax.persistence.Table;
 	        this.customer_num = customer_num;
 	        this.customer_email = customer_email;
 	        this.date_time = date_time;
+	        this.refunded = refunded;
+	        this.returned= returned;
 	        this.product = product;
 	    }
 
@@ -135,6 +137,22 @@ import javax.persistence.Table;
 
 		public void setBalance(double balance) {
 			this.balance = balance;
+		}
+
+		public boolean isRefunded() {
+			return refunded;
+		}
+
+		public void setRefunded(boolean refunded) {
+			this.refunded = refunded;
+		}
+
+		public boolean isReturned() {
+			return returned;
+		}
+
+		public void setReturned(boolean returned) {
+			this.returned = returned;
 		}
 
 

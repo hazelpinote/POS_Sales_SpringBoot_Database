@@ -20,8 +20,8 @@ import com.pos_sales.service.TransactionService;
 
 
 @RestController
-@RequestMapping("/transaction")
 @CrossOrigin("http://localhost:3000")
+@RequestMapping("/transaction")
 public class TransactionController {
 
 		@Autowired
