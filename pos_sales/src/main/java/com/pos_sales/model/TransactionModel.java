@@ -3,6 +3,7 @@ package com.pos_sales.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 @Entity
 @RestController
@@ -33,6 +37,7 @@ import javax.persistence.Table;
 	    private boolean refunded;
 	    private boolean returned;
 
+	    @Column(unique = false)
 	    @OneToMany
 	    public List<ProductModel> product;
 	    

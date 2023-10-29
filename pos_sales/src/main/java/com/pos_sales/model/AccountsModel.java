@@ -24,13 +24,14 @@ import javax.persistence.Table;
 	    private String business_name;
 	    private String address;
 	    private String contactnum;
-	    
+	    private String gender;
+	    private String bday;
 	  
 	    
 	    public AccountsModel() {}
 	    
 	    public AccountsModel(int userid, String username, String password, String account_type, String email, String fname, String mname, String lname
-	    		, String business_name, String address, String contactnum) {
+	    		, String business_name, String address, String contactnum, String gender, String bday) {
 	        this.userid = userid;
 	        this.username = username;
 	        this.password = password;
@@ -42,7 +43,25 @@ import javax.persistence.Table;
 	        this.business_name = business_name;
 	        this.address = address;
 	        this.contactnum = contactnum;
+	        this.gender = gender;
+	        this.bday = bday;
 	    }
+
+		public String getGender() {
+			return gender;
+		}
+
+		public void setGender(String gender) {
+			this.gender = gender;
+		}
+
+		public String getBday() {
+			return bday;
+		}
+
+		public void setBday(String bday) {
+			this.bday = bday;
+		}
 
 		public int getUserid() {
 			return userid;
