@@ -22,7 +22,7 @@ import com.pos_sales.service.AccountsService;
 
 
 @RestController
-@CrossOrigin('http://localhost:3000')
+@CrossOrigin("http://localhost:3000")
 @RequestMapping("/user")
 public class AccountsController {
 
