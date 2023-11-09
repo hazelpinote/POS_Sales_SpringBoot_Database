@@ -180,7 +180,7 @@ public class AccountsController {
 			            try {
 			                helper.setTo(toEmail);
 			                helper.setSubject("Password Reset");
-			                helper.setText("<p>Click <a href='http://localhost:3000/forgotpassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
+			                helper.setText("<p>Click <a href='http://localhost:3000/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
 
 			                javaMailSender.send(message);
 			                
