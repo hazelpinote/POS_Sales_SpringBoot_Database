@@ -1,5 +1,6 @@
 package com.pos_sales.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -148,48 +149,51 @@ public class AccountsController {
 				
 				@PostMapping("forgotpassword") 
 				public ResponseEntity<String> resetPassword(@RequestBody AccountsModel resetRequest) {
-					String email = resetRequest.getEmail();
-					
-					// Check if the email exists in the database
-					AccountsModel account = aserv.findByEmail(email);
-					
-					if (account != null) {
-						// Generate a token or a link for password reset 
-						String resetToken = generateResetToken();
-						
-						 // Store the reset token in the user's record in the database
-						account.setResetToken(resetToken);
-			            aserv.insertAccount(account);
+				    String email = resetRequest.getEmail();
+				    
+				    // Check if the email exists in the database
+				    AccountsModel account = aserv.findByEmail(email);
+				    
+				    if (account != null) {
+				        String resetToken = generateResetToken();
 
-			            // Send an email with the reset link
-			            sendResetEmail(account.getEmail(), resetToken);
+				        // Set the expiration time for the reset token (e.g., 24 hours from now)
+				        LocalDateTime expirationTime = LocalDateTime.now().plusHours(24);
+				        account.setResetToken(resetToken);
+				        account.setResetTokenExpiration(expirationTime);
+				      
+				        aserv.insertAccount(account);
 
-			            return new ResponseEntity<>("Password reset email sent successfully", HttpStatus.OK);
-			        } else {
-			            return new ResponseEntity<>("Email not found", HttpStatus.NOT_FOUND);
-			        }
-			    }
+				        // Send an email with the reset link
+				        sendResetEmail(account.getEmail(), resetToken);
 
-			    	@Autowired
-			        private JavaMailSender javaMailSender;
-			    	
-			        public void sendResetEmail(String toEmail, String resetToken) {
-			            MimeMessage message = javaMailSender.createMimeMessage();
-			            MimeMessageHelper helper = new MimeMessageHelper(message);
+				        return new ResponseEntity<>("Password reset email sent successfully", HttpStatus.OK);
+				    } else {
+				        return new ResponseEntity<>("Email not found", HttpStatus.NOT_FOUND);
+				    }
+				}
 
-			            try {
-			                helper.setTo(toEmail);
-			                helper.setSubject("Password Reset");
-			                helper.setText("<p>Click <a href='http://localhost:3000/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
+				@Autowired
+				private JavaMailSender javaMailSender;
 
-			                javaMailSender.send(message);
-			                
-			                System.out.println("Mail sent successfully...");
-			            } catch (MessagingException e) {
-			                e.printStackTrace();
-			                // Handle the exception
-			            }
-			        }
+				public void sendResetEmail(String toEmail, String resetToken) {
+				    MimeMessage message = javaMailSender.createMimeMessage();
+				    MimeMessageHelper helper = new MimeMessageHelper(message);
+
+				    try {
+				        helper.setTo(toEmail);
+				        helper.setSubject("Password Reset");
+				        helper.setText("<p>Click <a href='http://localhost:3000/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>  <p> This link will expire in 24 hours.", true);
+
+				        javaMailSender.send(message);
+				        
+				        System.out.println("Mail sent successfully...");
+				    } catch (MessagingException e) {
+				        e.printStackTrace();
+				        // Handle the exception
+				    }
+				}
+
 
 			    // Add a method to generate a reset token
 			    private String generateResetToken() {

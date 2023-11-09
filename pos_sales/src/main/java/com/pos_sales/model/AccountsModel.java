@@ -1,5 +1,7 @@
 package com.pos_sales.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,12 +28,13 @@ import javax.persistence.Table;
 	    private String gender;
 	    private String bday;
 	    private String resetToken;
+	    private LocalDateTime resetTokenExpiration;
 	  
 	    
 	    public AccountsModel() {}
 	    
 	    public AccountsModel(int userid, String username, String password, String account_type, String email, String fname,  String lname
-	    		, String business_name, String address, String contactnum, String gender, String bday, String resetToken) {
+	    		, String business_name, String address, String contactnum, String gender, String bday, String resetToken,  LocalDateTime resetTokenExpiration) {
 	        this.userid = userid;
 	        this.username = username;
 	        this.password = password;
@@ -46,6 +49,15 @@ import javax.persistence.Table;
 	        this.bday = bday;
 	        this.resetToken = resetToken;
 	    }
+
+
+		public LocalDateTime getResetTokenExpiration() {
+			return resetTokenExpiration;
+		}
+
+		public void setResetTokenExpiration(LocalDateTime resetTokenExpiration) {
+			this.resetTokenExpiration = resetTokenExpiration;
+		}
 
 		public String getResetToken() {
 			return resetToken;
