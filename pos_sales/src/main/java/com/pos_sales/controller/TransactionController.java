@@ -57,6 +57,18 @@ public class TransactionController {
 					return tserv.putTransaction(transactionid, newTransactionDetails);
 				}
 				
+				//isRefunded
+				@PutMapping("/isRefunded")
+				public TransactionModel isRefunded(@RequestParam int transactionid, @RequestBody TransactionModel newTransactionDetails) throws Exception{
+					return tserv.isRefund(transactionid, newTransactionDetails);
+				}
+				
+				//isReturned
+				@PutMapping("/isReturned")
+				public TransactionModel isReturned(@RequestParam int transactionid, @RequestBody TransactionModel newTransactionDetails) throws Exception{
+					return tserv.isReturned(transactionid, newTransactionDetails);
+				}
+				
 				//Delete a record
 				@DeleteMapping("/deleteTransaction/{transactionid}")
 				public String deleteTransaction(@PathVariable int transactionid) {

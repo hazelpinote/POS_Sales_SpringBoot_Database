@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pos_sales.model.AccountsModel;
 import com.pos_sales.model.ProductModel;
 import com.pos_sales.model.TransactionModel;
 import com.pos_sales.repository.TransactionRepository;
@@ -62,6 +63,43 @@ public class TransactionService {
 					throw new Exception("Transaction " + transactionid + " does not exist!");
 				}
 			}
+			
+			public TransactionModel isReturned(int transactionid,  TransactionModel newTransactionDetails) throws Exception {
+				TransactionModel transaction = new TransactionModel();
+				try {
+					//steps in updating
+					//Step 1 - search the id number of the user
+					transaction = trepo.findByTransactionid(transactionid);
+					
+					//Step 2 - update the record
+					transaction.setReturned(newTransactionDetails.isReturned());
+					
+					//Step 3 - save the information and return the value
+					return trepo.save(transaction);
+					
+				} catch (NoSuchElementException nex) {
+					throw new Exception("Cannot refund this transaction.");
+				}
+			}
+
+			public TransactionModel isRefund (int transactionid,  TransactionModel newTransactionDetails) throws Exception {
+				TransactionModel transaction = new TransactionModel();
+				try {
+					//steps in updating
+					//Step 1 - search the id number of the user
+					transaction = trepo.findByTransactionid(transactionid);
+					
+					//Step 2 - update the record
+					transaction.setRefunded(newTransactionDetails.isRefunded());
+					
+					//Step 3 - save the information and return the value
+					return trepo.save(transaction);
+					
+				} catch (NoSuchElementException nex) {
+					throw new Exception("Cannot refund this transaction.");
+				}
+			}
+
 			
 			//D - Delete transaction record
 			public String deleteTransaction(int transactionid) {

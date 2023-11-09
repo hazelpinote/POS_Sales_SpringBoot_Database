@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.pos_sales.model.AccountsModel;
 import com.pos_sales.service.AccountsService;
 
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
 @RequestMapping("/user")
+@CrossOrigin("http://localhost:3000")
 public class AccountsController {
 
 		@Autowired
@@ -195,5 +195,15 @@ public class AccountsController {
 			    private String generateResetToken() {
 			    	return UUID.randomUUID().toString();
 			    }
-		
+			    
+			    @CrossOrigin(origins = "http://localhost:3000")
+			  //Update a record
+				@PutMapping("/changepassword")
+				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
+					return aserv.updatePassword(resetToken, newAccountsDetails);
+				}
+			    
+			    
+			    
+			    
 	}

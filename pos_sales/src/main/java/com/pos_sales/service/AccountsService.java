@@ -41,6 +41,14 @@ public class AccountsService {
 					return null;
 			}
 			
+			// Search token by email
+						public AccountsModel findByResetToken(String resetToken) {
+							if(arepo.findByResetToken(resetToken) != null)
+								return arepo.findByResetToken(resetToken);
+							else
+								return null;
+						}
+			
 			//U - Update a product record
 			public AccountsModel putAccounts(int userid, AccountsModel newAccountsDetails) throws Exception{
 				AccountsModel account = new AccountsModel();
@@ -70,6 +78,24 @@ public class AccountsService {
 				}
 			}
 			
+			public AccountsModel updatePassword(String resetToken,  AccountsModel newAccountsDetails) throws Exception {
+				AccountsModel account = new AccountsModel();
+				try {
+					//steps in updating
+					//Step 1 - search the id number of the user
+					account = arepo.findByResetToken(resetToken); //findById() is a pre-defined method
+					
+					//Step 2 - update the record
+					account.setPassword(newAccountsDetails.getPassword());
+					
+					//Step 3 - save the information and return the value
+					return arepo.save(account);
+					
+				} catch (NoSuchElementException nex) {
+					throw new Exception("User  does not exist!");
+				}
+			}
+
 			//D - Delete product record
 			public String deleteAccount(int userid) {
 				String msg;
@@ -82,4 +108,6 @@ public class AccountsService {
 				
 				return msg;
 			}
+			
+			
 }

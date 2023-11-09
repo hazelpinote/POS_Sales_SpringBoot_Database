@@ -10,4 +10,5 @@ public interface AccountsRepository extends JpaRepository<AccountsModel, Integer
 		AccountsModel findByUsername(String username); 
 		AccountsModel findByUserid(int userid); 
 		AccountsModel findByEmail(String email);
+		AccountsModel findByResetToken(String resetToken);
 }
