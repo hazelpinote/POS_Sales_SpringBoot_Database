@@ -19,33 +19,41 @@ import javax.persistence.Table;
 	    private String account_type;
 	    private String email;
 	    private String fname;
-	    private String mname;
 	    private String lname;
 	    private String business_name;
 	    private String address;
 	    private String contactnum;
 	    private String gender;
 	    private String bday;
+	    private String resetToken;
 	  
 	    
 	    public AccountsModel() {}
 	    
-	    public AccountsModel(int userid, String username, String password, String account_type, String email, String fname, String mname, String lname
-	    		, String business_name, String address, String contactnum, String gender, String bday) {
+	    public AccountsModel(int userid, String username, String password, String account_type, String email, String fname,  String lname
+	    		, String business_name, String address, String contactnum, String gender, String bday, String resetToken) {
 	        this.userid = userid;
 	        this.username = username;
 	        this.password = password;
 	        this.account_type = account_type;
 	        this.email = email;
 	        this.fname = fname;
-	        this.mname = mname;
 	        this.lname = lname;
 	        this.business_name = business_name;
 	        this.address = address;
 	        this.contactnum = contactnum;
 	        this.gender = gender;
 	        this.bday = bday;
+	        this.resetToken = resetToken;
 	    }
+
+		public String getResetToken() {
+			return resetToken;
+		}
+
+		public void setResetToken(String resetToken) {
+			this.resetToken = resetToken;
+		}
 
 		public String getGender() {
 			return gender;
@@ -111,13 +119,6 @@ import javax.persistence.Table;
 			this.fname = fname;
 		}
 
-		public String getMname() {
-			return mname;
-		}
-
-		public void setMname(String mname) {
-			this.mname = mname;
-		}
 
 		public String getLname() {
 			return lname;

@@ -33,6 +33,13 @@ public class AccountsService {
 				else
 					return null;
 			}
+	// Search email by email
+			public AccountsModel findByEmail(String email) {
+				if(arepo.findByEmail(email) != null)
+					return arepo.findByEmail(email);
+				else
+					return null;
+			}
 			
 			//U - Update a product record
 			public AccountsModel putAccounts(int userid, AccountsModel newAccountsDetails) throws Exception{
@@ -49,7 +56,6 @@ public class AccountsService {
 					account.setAccount_type(newAccountsDetails.getAccount_type());
 					account.setEmail(newAccountsDetails.getEmail());
 					account.setFname(newAccountsDetails.getFname());
-					account.setMname(newAccountsDetails.getMname());
 					account.setLname(newAccountsDetails.getLname());
 					account.setBusiness_name(newAccountsDetails.getBusiness_name());
 					account.setContactnum(newAccountsDetails.getContactnum());
