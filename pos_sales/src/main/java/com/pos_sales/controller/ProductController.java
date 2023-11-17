@@ -2,10 +2,7 @@ package com.pos_sales.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,6 +36,7 @@ public class ProductController {
 				//Create or insert a product record
 				@PostMapping("/postProduct")
 				public ProductModel insertProduct(@RequestBody ProductModel product) {
+					product.setDeleted(false);
 					return pserv.insertProduct(product);
 				}
 				
@@ -54,30 +52,60 @@ public class ProductController {
 					return pserv.findByProductName(productname);	
 				}
 				
-				//Update a record
+				//Update quantity
 				@PutMapping("/putProduct")
 				public ProductModel putProduct(@RequestParam int productid, @RequestBody ProductModel newProductDetails) throws Exception{
 					return pserv.putProduct(productid, newProductDetails);
 				}
 				
-				//Decrease quantity
-				@PutMapping("/decreaseQuantity/{productid}")
-				public ResponseEntity<String> decreaseProductQuantity(@PathVariable int productid) {
-					try {
-						pserv.decreaseProductQuantity(productid);
-						return new ResponseEntity<>("Product quantity decreased successfully", HttpStatus.OK);
-					} catch (EntityNotFoundException e) {
-						return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
-					} catch (Exception e) {
-						return new ResponseEntity<>("Failed to decrease quantity", HttpStatus.INTERNAL_SERVER_ERROR);
-					}
+				@PutMapping("/putQuantity")
+				public ProductModel putQuantity(@RequestParam int productid, @RequestBody ProductModel newProductDetails) throws Exception{
+					return pserv.putQuantity(productid, newProductDetails);
 				}
 				
 				//Delete a record
-				@DeleteMapping("/deleteProduct/{productid}")
+				@PutMapping("/deleteProduct/{productid}")
 				public String deleteProduct(@PathVariable int productid) {
-					return pserv.deleteProduct(productid);
+					return pserv.deleteProduct(productid); 
 				}
 				
+			    @GetMapping("/most-purchased")
+			    public ResponseEntity<ProductModel> getMostPurchasedProduct() {
+			        // Call the service to retrieve the most purchased product
+			        ProductModel mostPurchasedProduct = pserv.getMostPurchasedProduct();
+
+			        if (mostPurchasedProduct != null) {
+			            return ResponseEntity.ok(mostPurchasedProduct);
+			        } else {
+			            return ResponseEntity.notFound().build();
+			        }
+			    }				
 				
+			 // Decrease quantity of a product
+			    @PutMapping("/decreaseQuantity/{productid}")
+			    public ResponseEntity<String> decreaseQuantity(
+			            @PathVariable int productid,
+			            @RequestParam("quantityToDecrease") int quantityToDecrease
+			    ) {
+			        try {
+			            ProductModel product = pserv.decreaseQuantity(productid, quantityToDecrease);
+			            return ResponseEntity.ok("Quantity decreased for product: " + product.getProductname());
+			        } catch (Exception e) {
+			            return ResponseEntity.badRequest().body(e.getMessage());
+			        }
+			    }
+
+
+			    // Increment purchase count of a product by a specified quantity
+			    @PutMapping("/incrementPurchaseCount/{productid}")
+			    public ResponseEntity<String> incrementPurchaseCount(@PathVariable int productid, @RequestParam int quantityPurchased) {
+			        try {
+			            ProductModel product = pserv.incrementPurchaseCount(productid, quantityPurchased);
+			            return ResponseEntity.ok("Purchase count incremented for product: " + product.getProductname());
+			        } catch (Exception e) {
+			            return ResponseEntity.badRequest().body(e.getMessage());
+			        }
+			    }
+
+			    
 }

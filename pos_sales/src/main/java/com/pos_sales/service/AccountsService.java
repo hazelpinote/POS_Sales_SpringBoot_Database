@@ -33,6 +33,14 @@ public class AccountsService {
 				else
 					return null;
 			}
+
+			public AccountsModel findByUserid(int userid) {
+				if (arepo.findByUserid(userid) !=null)
+					return arepo.findByUserid(userid);
+				else
+					return null;
+			}
+
 	// Search email by email
 			public AccountsModel findByEmail(String email) {
 				if(arepo.findByEmail(email) != null)

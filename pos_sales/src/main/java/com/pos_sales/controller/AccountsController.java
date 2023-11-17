@@ -55,12 +55,16 @@ public class AccountsController {
 				}
 				
 				
-				//Read a record by user name
+				//Read a record by username
 				@GetMapping("/getByUser")
 				public AccountsModel findByUsername(@RequestParam String username) {
 					return aserv.findByUsername(username);	
 				}
-				
+
+				@GetMapping("/getUserById")
+				public AccountsModel findByUserid(@RequestParam int userid) { return aserv.findByUserid(userid);}
+
+
 				//Update a record
 				@PutMapping("/putUser")
 				public AccountsModel putAccounts(@RequestParam int userid, @RequestBody AccountsModel newAccountsDetails) throws Exception{
@@ -206,8 +210,5 @@ public class AccountsController {
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
 					return aserv.updatePassword(resetToken, newAccountsDetails);
 				}
-			    
-			    
-			    
-			    
+
 	}

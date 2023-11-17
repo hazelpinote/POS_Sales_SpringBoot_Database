@@ -7,59 +7,75 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbl_product")
-	public class ProductModel {
+@Table(name = "tbl_product")
+public class ProductModel {
 
-		@Id
-	    @GeneratedValue (strategy = GenerationType.IDENTITY)
-	    private int productid;
-	    
-	    private String productname;
-	    private int quantity;
-	    private double price;
-	  
-	    
-	    public ProductModel() {}
-	    
-	    public ProductModel(int productid, String productname, int quantity, double price) {
-	        this.productid = productid;
-	        this.productname = productname;
-	        this.quantity = quantity;
-	        this.price = price;
-	    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int productid;
 
-		public int getProductid() {
-			return productid;
-		}
+    private String productname;
+    private int quantity;
+    private double price;
+    private boolean isDeleted; // Add isDeleted field
+    private int purchaseCount; 
 
-//		public void setProductid(int productid) {
-//			this.productid = productid;
-//		}
+    public ProductModel() {
+    }
 
-		public String getProductname() {
-			return productname;
-		}
+    public ProductModel(int productid, String productname, int quantity, double price, int purchaseCount) {
+        this.productid = productid;
+        this.productname = productname;
+        this.quantity = quantity;
+        this.price = price;
+        this.purchaseCount = purchaseCount;
+    }
 
-		public void setProductname(String productname) {
-			this.productname = productname;
-		}
+    public int getProductid() {
+        return productid;
+    }
 
-		public int getQuantity() {
-			return quantity;
-		}
+//    public void setProductid(int productid) {
+//        this.productid = productid;
+//    }
 
-		public void setQuantity(int quantity) {
-			this.quantity = quantity;
-		}
+    public String getProductname() {
+        return productname;
+    }
 
-		public double getPrice() {
-			return price;
-		}
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
 
-		public void setPrice(double price) {
-			this.price = price;
-		}
+    public int getQuantity() {
+        return quantity;
+    }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public int getPurchaseCount() {
+        return purchaseCount;
+    }
+
+    public void setPurchaseCount(int purchaseCount) {
+        this.purchaseCount = purchaseCount;
+    }
 }
