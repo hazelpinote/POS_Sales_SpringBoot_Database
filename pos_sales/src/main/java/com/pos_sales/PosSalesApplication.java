@@ -16,9 +16,5 @@ public class PosSalesApplication {
 		SpringApplication.run(PosSalesApplication.class, args);
 	}
 
-//	@EventListener(ApplicationReadyEvent.class)
-//	public void sendMail() {
-//		senderService.sendResetEmail("trishajoyoballo@gmail.com", "");
-//	}
 	
 }
