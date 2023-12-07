@@ -3,14 +3,15 @@ package com.pos_sales;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class PosSalesApplication {
 
 	@Autowired
 	private EmailService senderService;
+
+	// Load environment variables from .env file
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PosSalesApplication.class, args);
@@ -18,7 +19,7 @@ public class PosSalesApplication {
 
 //	@EventListener(ApplicationReadyEvent.class)
 //	public void sendMail() {
-//		senderService.sendResetEmail("trishajoyoballo@gmail.com", "");
+//		senderService.sendResetEmail("", "");
 //	}
 	
 }
