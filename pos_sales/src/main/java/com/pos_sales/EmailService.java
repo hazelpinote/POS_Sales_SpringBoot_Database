@@ -22,7 +22,7 @@ public class EmailService {
         try {
             helper.setTo(toEmail);
             helper.setSubject("Password Reset");
-            helper.setText("<p>Click <a href='http://localhost:3000/forgotpassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
+            helper.setText("<p>Click <a href='https://dilven-pos-sales-management-database-2.onrender.com/forgotpassword?token=" + resetToken + "'>this link</a> to reset your password</p>", true);
 
             javaMailSender.send(message);
             

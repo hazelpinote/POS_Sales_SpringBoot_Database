@@ -21,7 +21,7 @@ import com.pos_sales.service.ProductService;
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven-pos.vercel.app")
 public class ProductController {
 
 		@Autowired

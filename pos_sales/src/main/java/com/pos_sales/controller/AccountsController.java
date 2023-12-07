@@ -30,7 +30,7 @@ import com.pos_sales.service.AccountsService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven-pos.vercel.app")
 public class AccountsController {
 
 		@Autowired
@@ -187,7 +187,7 @@ public class AccountsController {
 				    try {
 				        helper.setTo(toEmail);
 				        helper.setSubject("Password Reset");
-				        helper.setText("<p>Click <a href='http://localhost:3000/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>  <p> This link will expire in 24 hours.", true);
+				        helper.setText("<p>Click <a href='https://dilven-pos.vercel.app/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>  <p> This link will expire in 24 hours.", true);
 
 				        javaMailSender.send(message);
 				        
@@ -204,7 +204,7 @@ public class AccountsController {
 			    	return UUID.randomUUID().toString();
 			    }
 			    
-			    @CrossOrigin(origins = "http://localhost:3000")
+			    @CrossOrigin(origins = "https://dilven-pos.vercel.app")
 			  //Update a record
 				@PutMapping("/changepassword")
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
