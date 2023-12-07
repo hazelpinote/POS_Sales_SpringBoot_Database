@@ -154,10 +154,10 @@ public class AccountsController {
 				@PostMapping("forgotpassword") 
 				public ResponseEntity<String> resetPassword(@RequestBody AccountsModel resetRequest) {
 				    String email = resetRequest.getEmail();
-				    
+
 				    // Check if the email exists in the database
 				    AccountsModel account = aserv.findByEmail(email);
-				    
+
 				    if (account != null) {
 				        String resetToken = generateResetToken();
 
@@ -205,7 +205,6 @@ public class AccountsController {
 			    }
 			    
 			    @CrossOrigin(origins = "https://dilven-pos.vercel.app")
-			  //Update a record
 				@PutMapping("/changepassword")
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
 					return aserv.updatePassword(resetToken, newAccountsDetails);
