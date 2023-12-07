@@ -15,7 +15,7 @@
                 public void addCorsMappings(CorsRegistry registry) {
                     registry.addMapping("*")
                             .allowedOrigins("https://dilven-pos.vercel.app")
-                            .allowedMethods("*")
+                            .allowedMethods("GET", "POST", "PUT", "DELETE")
                             .allowedHeaders("*")
                             .allowCredentials(true);
                 }
