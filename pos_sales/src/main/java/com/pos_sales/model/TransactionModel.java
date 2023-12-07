@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Entity
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven-pos.vercel.app")
 @Table(name="tbl_transaction")
 	public class TransactionModel {
 
