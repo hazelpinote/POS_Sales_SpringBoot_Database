@@ -30,7 +30,7 @@ import com.pos_sales.service.AccountsService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven-pos.vercel.app")
 public class AccountsController {
 
 		@Autowired
@@ -204,7 +204,7 @@ public class AccountsController {
 			    	return UUID.randomUUID().toString();
 			    }
 			    
-			    @CrossOrigin(origins = "http://localhost:3000")
+			    @CrossOrigin("https://dilven-pos.vercel.app")
 			  //Update a record
 				@PutMapping("/changepassword")
 				public AccountsModel ChangePassword(@RequestParam String resetToken, @RequestBody AccountsModel newAccountsDetails) throws Exception{
