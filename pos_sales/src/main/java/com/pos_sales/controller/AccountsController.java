@@ -187,7 +187,7 @@ public class AccountsController {
 				    try {
 				        helper.setTo(toEmail);
 				        helper.setSubject("Password Reset");
-				        helper.setText("<p>Click <a href='https://dilven-pos.vercel.app/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>  <p> This link will expire in 24 hours.", true);
+				        helper.setText("<p>Click <a href='https://dilven-pos-sales-management-database-2.onrender.com/changepassword?token=" + resetToken + "'>this link</a> to reset your password</p>  <p> This link will expire in 24 hours.", true);
 
 				        javaMailSender.send(message);
 				        
