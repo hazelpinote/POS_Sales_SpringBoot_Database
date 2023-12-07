@@ -30,7 +30,7 @@ import com.pos_sales.service.AccountsService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin("https://dilven-pos.vercel.app")
+@CrossOrigin(origins = "*")
 public class AccountsController {
 
 		@Autowired
