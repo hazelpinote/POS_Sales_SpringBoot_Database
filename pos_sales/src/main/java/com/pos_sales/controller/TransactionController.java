@@ -20,7 +20,7 @@ import com.pos_sales.service.TransactionService;
 
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("https://dilven-pos.vercel.app")
 @RequestMapping("/transaction")
 public class TransactionController {
 
