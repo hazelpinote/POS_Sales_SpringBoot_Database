@@ -129,27 +129,15 @@ public class AccountsController {
 				}		
 				
 				
-				@PostMapping("/loginad")
-				public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
-				    AccountsModel user = aserv.findByUsername(loginRequest.getUsername());
-				    
-				    if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-				        // Check the account_type to see if the user is a cashier
-				        if ("Administrator".equals(user.getAccount_type())) {
-				            // Successful login for a cashier user
-				            return new ResponseEntity<>("Login successful", HttpStatus.OK);
-				        } else {
-				            // Reject login for users with other account types
-				            return new ResponseEntity<>("Access denied for this account type", HttpStatus.FORBIDDEN);
-				        }
-				    } else if(user != null && user.getPassword().equals(null)) {
-				    	return new ResponseEntity<>("Please enter your username and password.", HttpStatus.FORBIDDEN);
-				    } else {
-				    	// Failed login
-				        return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
-				    }
-				        
-				    }
+				@PostMapping({"/loginad"})
+			    public ResponseEntity<String> loginad(@RequestBody AccountsModel loginRequest) {
+			        AccountsModel user = this.aserv.findByUsername(loginRequest.getUsername());
+			        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+			            return "Administrator".equals(user.getAccount_type()) ? new ResponseEntity(user, HttpStatus.OK) : new ResponseEntity("Access denied for this account type", HttpStatus.FORBIDDEN);
+			        } else {
+			            return user != null && user.getPassword().equals((Object)null) ? new ResponseEntity("Please enter your username and password.", HttpStatus.FORBIDDEN) : new ResponseEntity("Invalid credentials", HttpStatus.UNAUTHORIZED);
+			        }
+			   }
 				
 				@PostMapping("forgotpassword") 
 				public ResponseEntity<String> resetPassword(@RequestBody AccountsModel resetRequest) {
